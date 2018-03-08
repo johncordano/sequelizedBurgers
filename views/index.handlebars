@@ -6,7 +6,7 @@
       <h1>Eat-Da-Burger</h1>
     </div>
   </div>
-  {{!-- Use the burger-block.handlebars file to display the list of not devoured burgers, the list of devoured burgers, and the Devour It button for each not devoured burger. --}}
+  {{!-- Display the list of not devoured burgers, the list of devoured burgers, and the Devour It button for each not devoured burger. --}}
   <div class="row" id="second-row">
     <div class="col-md-2">
     </div>
@@ -14,8 +14,13 @@
       <h3>Burgers Not Devoured</h3>
     <ol>
       {{#each burgers}}
-        {{#unless devoured}}
-          {{> burgers/burger-block devour=true}}
+        {{#unless this.devoured}}
+          <li>
+            {{this.burger_name}}
+            <button class="change-devour btn btn-warning" data-id="{{this.id}}" data-newdevour="{{this.devoured}}">
+              Devour It!
+            </button>
+          </li>
         {{/unless}}
       {{/each}}
     </ol>
@@ -24,8 +29,10 @@
       <h3>Burgers Devoured</h3>
     <ol>
       {{#each burgers}}
-        {{#if devoured}}
-          {{> burgers/burger-block devour=false}}
+        {{#if this.devoured}}
+          <li>
+            {{this.burger_name}}
+          </li>
         {{/if}}
       {{/each}}
     </ol>
